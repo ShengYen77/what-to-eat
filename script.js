@@ -1,18 +1,14 @@
-let dinner = [];
+async function pickFood(type) {
 
-fetch("data/dinner.json")
-    .then(response => response.json())
-    .then(data => {
-        dinner = data;
-    });
+    const response = await fetch(`data/${type}.json`);
 
-function pickDinner() {
+    const foods = await response.json();
 
-    const randomIndex = Math.floor(Math.random() * dinner.length);
+    const randomIndex =
+        Math.floor(Math.random() * foods.length);
 
-    const food = dinner[randomIndex];
+    const food = foods[randomIndex];
 
     document.getElementById("result").innerHTML =
-        `🎉 今天晚餐吃<br><br><h1>${food}</h1>`;
-
+        `🎉 今天推薦<br><br><h1>${food}</h1>`;
 }
